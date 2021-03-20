@@ -2,14 +2,9 @@ DROP DATABASE IF EXISTS team_db;
 CREATE DATABASE team_db;
 USE team_db;
 
-CREATE TABLE employee(
+CREATE TABLE department(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    role_id INTEGER NOT NULL,
-    manager_id INTEGER,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
-    FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE CASCADE
+    name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE roles(
@@ -20,7 +15,12 @@ CREATE TABLE roles(
     FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 );
 
-CREATE TABLE department(
+CREATE TABLE employee(
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INTEGER NOT NULL,
+    manager_id INTEGER,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE CASCADE
 );
